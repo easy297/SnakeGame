@@ -49,23 +49,37 @@ while not game_over:
             if event.key == pygame.K_DOWN and snake_direction != "UP":
                 snake_direction = "DOWN"
 
-#Движение
-if snake_direction == "UP":
-    new_head = (snake[0][0], snake[0][1] - SNAKE_SIZE)
-if snake_direction == "DOWN":
-    new_head = (snake[0][0], snake[0][1] + SNAKE_SIZE)
-if snake_direction == "LEFT":
-    new_head = (snake[0][0] - SNAKE_SIZE, snake[0][1])
-if snake_direction == "RIGHT":
-    new_head = (snake[0][0] + SNAKE_SIZE, snake[0][1])
+    #Движение
+    if snake_direction == "UP":
+        new_head = (snake[0][0], snake[0][1] - SNAKE_SIZE)
+    if snake_direction == "DOWN":
+        new_head = (snake[0][0], snake[0][1] + SNAKE_SIZE)
+    if snake_direction == "LEFT":
+        new_head = (snake[0][0] - SNAKE_SIZE, snake[0][1])
+    if snake_direction == "RIGHT":
+        new_head = (snake[0][0] + SNAKE_SIZE, snake[0][1])
 
-snake.insert(0, new_head)
+    snake.insert(0, new_head)
 
+    # Проверка змея сьела фрукт
+    if snake[0] == fruit:
+        fruit = (random.randrange(1, (WIDTH //SNAKE_SIZE)) * SNAKE_SIZE,
+                 random.randrange(1, (HEIGHT // SNAKE_SIZE)) * SNAKE_SIZE)
+    else:
+        snake.pop()
 
+    screen.fill(WHITE)
 
+    for segment in snake:
+        pygame.draw.rect(screen, GREEN, (segment[0], segment[1], SNAKE_SIZE, SNAKE_SIZE))
 
+    draw_fruit(fruit)
 
+    pygame.display.update()
 
+    pygame.time.Clock().tick(SPEED)
+
+pygame.quit()
 
 
 
