@@ -49,8 +49,17 @@ while not game_over:
             if event.key == pygame.K_DOWN and snake_direction != "UP":
                 snake_direction = "DOWN"
 
+#Движение
+if snake_direction == "UP":
+    new_head = (snake[0][0], snake[0][1] - SNAKE_SIZE)
+if snake_direction == "DOWN":
+    new_head = (snake[0][0], snake[0][1] + SNAKE_SIZE)
+if snake_direction == "LEFT":
+    new_head = (snake[0][0] - SNAKE_SIZE, snake[0][1])
+if snake_direction == "RIGHT":
+    new_head = (snake[0][0] + SNAKE_SIZE, snake[0][1])
 
-
+snake.insert(0, new_head)
 
 
 
